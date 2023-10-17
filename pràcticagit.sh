@@ -45,3 +45,14 @@ while [[ $resposta != "q" ]]; do
     #6e apartat : llistar les poblacions del país seleccionat
     if [[ $resposta == "lcp" ]];then
         cut -d',' -f2,11 sel.csv
+    fi
+    #7e apartat: extreure les poblacions del pais seleccionat
+    if [[ $resposta == "ecp" ]];then
+        touch $codipais.csv
+        cut -d',' -f2,11 sel.csv > $codipais.csv
+        cat $codipais.csv
+    fi
+    #8e apartat: llistar les poblacions de l'estat seleccionat
+    if [[ $resposta == "lce" ]];then
+        awk -F ',' -v codi="$codiestat" '$4 == codi {print $2,$11}' sel.csv
+    fi
