@@ -73,3 +73,18 @@ while [[ $resposta != "q" ]]; do
                     cat "$wikidata.json"
            fi
     fi
+    #11e apartat: Mostrar les estadístiques
+    if [[ $resposta == "est" ]];then
+        c1=0
+        awk -F ',' '$9 > 0 {c1++} END {print "Nord",c1}' cities.csv
+        c2=0
+        awk -F ',' '$9 < 0 {c2++} END {print "Sud",c2}' cities.csv
+        c3=0
+        awk -F ',' '$10 > 0 {c3++} END {print "Est",c3}' cities.csv
+        c4=0
+        awk -F ',' '$10 < 0 {c4++} END {print "Oest",c4}' cities.csv
+        c5=0
+        awk -F ',' '$9 == 0 && $10 == 0 {c5++} END {print "No ubicació",c5}' cities.csv
+        c6=0
+        awk -F ',' '$11 == "" {c6++} END {print "No Wdld",c6}' cities.csv
+    fi
