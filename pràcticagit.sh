@@ -40,7 +40,7 @@ while [[ $resposta != "q" ]]; do
     fi
      #5e apartat: llistar els estats del país seleccionat
     if [[ $resposta == "le" ]];then
-        cut -d',' -f4,5 sel.csv
+        cut -d',' -f4,5 sel.csv | uniq
     fi
     #6e apartat : llistar les poblacions del país seleccionat
     if [[ $resposta == "lcp" ]];then
@@ -88,3 +88,22 @@ while [[ $resposta != "q" ]]; do
         c6=0
         awk -F ',' '$11 == "" {c6++} END {print "No Wdld",c6}' cities.csv
     fi
+    #if [[ $resposta != "est" && $resposta != "lp"  && $resposta != "ece" & $resposta != "gwd" && $resposta != "ecp" and $resposta !="lp" && $resposta != "sc" && $resposta != "se" && $resposta != "le" && $resposta != "lcp" ]];then
+    
+	    #echo "Opció desconeguda"
+    #fi
+    if [[ $resposta != "est" && $resposta != "lp" && $resposta != "ece" && $resposta != "gwd" && $resposta != "ecp" && $resposta != "sc" && $resposta != "se" && $resposta != "le" && $resposta != "lcp" ]]; then
+    
+	    echo "Opció desconeguda"
+    fi
+
+    echo "Tria una opció"
+    read resposta
+done
+
+
+if [[ $resposta == "q" ]]; then
+        echo Sortint ....
+        exit
+fi
+
