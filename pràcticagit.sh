@@ -23,3 +23,18 @@ while [[ $resposta != "q" ]]; do
             fi
         fi
     fi
+ # 4rt apartat: seleccionar un estat
+    if [[ $resposta == "se" ]]; then
+        echo "Nom estat:"
+        read nomestat
+        if [[ $nomestat == "" ]]; then
+            codiestat=$codiestat
+        else
+                if [[ $(cut -d',' -f5 sel.csv | grep "$nomestat") = "" ]];then
+                        codiestat="XX"
+                        echo $codiestat
+                else
+                        codiestat=$(cut -d',' -f4,5 sel.csv | grep -m 1 "$nomestat" | cut -d',' -f1)
+                fi
+       fi
+    fi
