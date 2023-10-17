@@ -56,3 +56,20 @@ while [[ $resposta != "q" ]]; do
     if [[ $resposta == "lce" ]];then
         awk -F ',' -v codi="$codiestat" '$4 == codi {print $2,$11}' sel.csv
     fi
+     #9e apartat: extreure les poblacions de l'estat seleccionat
+    if [[ $resposta == "ece" ]];then
+        touch $codiestat.csv
+        awk -F ',' -v codi="$codiestat" '$4 == codi {print $2,$11}' sel.csv >> $codiestat.csv
+        cat $codiestat.csv
+    fi
+    #10e apartat: Obtenir les dades d'una ciutat de la wikidata
+    if [[ $resposta == "gwd" ]];then
+            echo Tria una ciutat:
+            read ciutat
+            wikidata=$(cut -d',' -f1,2 $codiestat.csv | grep -m 1 "$ciutat" | cut -d' ' -f2)
+            if [[ $(grep "$ciutat" sel.csv) && $wikidata != "" ]]; then
+                    touch $wikidata.json
+                    wget "https://www.wikidata.org/wiki/Special:EntityData/$wikidata.json" -O "$wikidata.json"
+                    cat "$wikidata.json"
+           fi
+    fi
