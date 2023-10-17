@@ -38,3 +38,10 @@ while [[ $resposta != "q" ]]; do
                 fi
        fi
     fi
+     #5e apartat: llistar els estats del país seleccionat
+    if [[ $resposta == "le" ]];then
+        cut -d',' -f4,5 sel.csv
+    fi
+    #6e apartat : llistar les poblacions del país seleccionat
+    if [[ $resposta == "lcp" ]];then
+        cut -d',' -f2,11 sel.csv
